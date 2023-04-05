@@ -70,7 +70,10 @@ int	julia(void)
 	img = new_img(WIDTH, HEIGHT, tutorial);
 	vars()->win = &tutorial;
 	vars()->img_ptr = &img;
-	image_julia(img, 0, 0);
+	vars()->off_set_x = 0;
+	vars()->off_set_y = 0;
+	vars()->zoom_i = 50;
+	image_julia(img, vars()->off_set_x, vars()->off_set_y);
 	mlx_put_image_to_window(img.win.mlx_ptr, img.win.win_ptr, \
 	img.img_ptr, 0, 0);
 	mlx_hook(tutorial.win_ptr, 2, 1L << 0, key_hook, vars());

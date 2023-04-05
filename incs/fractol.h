@@ -58,14 +58,12 @@ typedef struct s_var
 	t_win	*win;
 	t_img	*img_ptr;
 	char	*fractol;
+	int		off_set_x;
+	int		off_set_y;
+	int		zoom_y;
+	int		zoom_x;
+	int		zoom_i;
 }	t_var;
-
-typedef struct s_color
-{
-	int r;
-	int g;
-	int b;
-}	t_color;
 
 t_win	new_program(int w, int h, char *str);
 t_img	new_img(int w, int h, t_win window);
@@ -96,6 +94,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 # define RIGHT_CLICK 2
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
-
+# define KEY_LEFT 65361
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_RIGHT 65363
 
 #endif
