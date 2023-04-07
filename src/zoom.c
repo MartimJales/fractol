@@ -6,7 +6,7 @@
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:23:27 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 14:34:12 by mjales           ###   ########.fr       */
+/*   Updated: 2023/04/07 16:59:25 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int	put_image(void)
 {
 	mlx_clear_window(vars()->win->mlx_ptr, vars()->win->win_ptr);
 	if (ft_strncmp(vars()->fractol, "MANDELBROT", 10) == 0)
-		image_mandelbrot(*vars()->img_ptr, vars()->off_set_x + vars()->zoom_x, vars()->off_set_y + vars()->zoom_y);
+		image_mandelbrot(*vars()->img_ptr, \
+		vars()->off_set_x + vars()->zoom_x, vars()->off_set_y + vars()->zoom_y);
 	else if (ft_strncmp(vars()->fractol, "JULIA", 5) == 0)
-		image_julia(*vars()->img_ptr, vars()->off_set_x + vars()->zoom_x, vars()->off_set_y + vars()->zoom_y);
+		image_julia(*vars()->img_ptr, \
+		vars()->off_set_x + vars()->zoom_x, vars()->off_set_y + vars()->zoom_y);
 	else
 		return (write(1, "FRACTOL NOT FOUND\n", 19));
 	mlx_put_image_to_window(vars()->win->mlx_ptr, vars()->win->win_ptr, \

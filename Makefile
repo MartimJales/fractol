@@ -1,47 +1,54 @@
-NAME	:=	fractol
+NAME     := fractol
+CC       := gcc
+FLAGS    := -Wall -Wextra -Werror -O3 -g 
 
-CC		:=	gcc
-CFLAGS	:= -O3 -Wall -Wextra -Werror
-LIBS	=	-I -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-PATH_SRC		:=	./src
-PATH_INCLUDES	:=	./incs
-PATH_BUILD		:= ./build
-PATH_OBJS		:= $(PATH_BUILD)/objs
+SRCS        :=      src/hook.c \
+                          src/zoom.c \
+                          src/main.c \
+                          src/mandelbrot.c \
+                          src/assets.c \
+                          src/image.c \
+                          src/julia.c \
+                          src/colors.c \
+						  src/move.c \
+						  src/mouse.c \
+                          
+OBJS        := $(SRCS:.c=.o)
 
-SRCS			:= $(PATH_SRC)/main.c \
-					$(PATH_SRC)/hook.c \
-					$(PATH_SRC)/mandelbrot.c \
-					$(PATH_SRC)/julia.c \
-					$(PATH_SRC)/image.c \
-					$(PATH_SRC)/zoom.c \
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-OBJ				:= $(subst .c,.o,$(subst $(PATH_SRC), $(PATH_OBJS), $(SRCS)))
+CLR_RMV		:= \033[0m
+RED		    := \033[1;31m
+GREEN		:= \033[1;32m
+YELLOW		:= \033[1;33m
+BLUE		:= \033[1;34m
+CYAN 		:= \033[1;36m
+RM		    := rm -f
 
-all:$(NAME)
+UNAME		:=	$(shell uname)
 
-# $(NAME): $(OBJ)
-# 		@$(CC) $(CFLAGS) $(LIBS) -o $(@) $^ -I$(PATH_INCLUDES)
-# 		@printf "\033[44m[FRACT-OL BUILT!]\033[0m\n"
+$(NAME): ${OBJS}
+			# @echo "$(GREEN)Linux compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			@chmod 777 mlx_linux/configure
+			@ $(MAKE) -C mlx_linux all
+			@ $(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS) -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
+			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
-$(NAME): $(OBJ)
-		@$(CC) $(CFLAGS) -o $(@) $^ -I$(PATH_INCLUDES)  $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-		@printf "\033[44m[$(NAME) BUILT!]\033[0m\n"
-
-$(PATH_OBJS)/%.o: $(PATH_SRC)/%.c | $(PATH_BUILD)
-		@$(CC) $(CFLAGS)  -c $(^) -o $@
-		@printf "\033[36m[Building ${@F}]\033[0m\n"
-
-
-$(PATH_BUILD):
-		@mkdir -p $(PATH_BUILD)
-		@mkdir -p $(PATH_OBJS) 
+all:		${NAME}
 
 clean:
-		@printf "\033[38;5;1m[Cleaning objects!]\033[0m\n"
-		@rm -rf $(PATH_OBJS)
+			@ ${RM} *.o */*.o */*/*.o
+			@ rm -rf $(NAME).dSYM >/dev/null 2>&1
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
 
-fclean: clean
-		@printf "\033[38;5;1m[Cleaning Bin!]\033[0m\n"
-		@rm -rf $(PATH_BUILD) $(NAME)
+fclean:		clean
+			@ ${RM} ${NAME}
+			@ $(MAKE) -C mlx_linux clean 
+			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
-re: fclean all
+re:			fclean all
+
+.PHONY:		all clean fclean re
+
+

@@ -6,15 +6,15 @@
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:18:10 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 14:12:15 by mjales           ###   ########.fr       */
+/*   Updated: 2023/04/07 17:28:27 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 600
+# define HEIGHT 400
 # define MAX_ITER 300
 
 # include<stdio.h>
@@ -62,14 +62,15 @@ typedef struct s_var
 	int		off_set_y;
 	int		zoom_y;
 	int		zoom_x;
-	int		zoom_i;
+	double		real;
+	double		imag;
 }	t_var;
 
 t_win	new_program(int w, int h, char *str);
 t_img	new_img(int w, int h, t_win window);
 void	put_pixel_img(t_img img, int x, int y, int color);
-int		key_hook(int keycode, t_var *window);
-int		mouse_hook(int keycode, t_var *vars);
+int		key_hook(int keycode, t_var *vars);
+int		mouse_hook(int keycode);
 int		image_mandelbrot(t_img image, int mouse_x, int mouse_y);
 int		image_julia(t_img img, int mouse_x, int mouse_y);
 int		exit_program(t_var *vars);
@@ -88,6 +89,15 @@ int		map_color(int intensity, int max);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		put_image(void);
 
+
+// MOVE
+void	move_up(t_var *vars);
+void	move_down(t_var *vars);
+void	move_left(t_var *vars);
+void	move_right(t_var *vars);
+
+// MOUSE
+void new_fractol(void);
 
 
 # define ESC_KEY 65307

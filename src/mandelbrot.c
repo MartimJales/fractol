@@ -6,7 +6,7 @@
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:37:29 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 14:34:10 by mjales           ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:07 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	mandelbrot_pix(double real, double imag, int maxIterations)
 	{
 		new_real = z_real * z_real - z_imag * z_imag + real;
 		new_imag = 2 * z_real * z_imag + imag;
-
 		z_real = new_real;
 		z_imag = new_imag;
 		iter++;
@@ -79,5 +78,3 @@ int	mandelbrot(void)
 	mlx_loop(tutorial.mlx_ptr);
 	return (0);
 }
-
-

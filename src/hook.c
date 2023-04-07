@@ -6,43 +6,16 @@
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:36:18 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 14:34:00 by mjales           ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:25 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fractol.h"
 
-void	move_up(t_var *vars)
-{
-	vars->off_set_y -= 40;
-	put_image();
-}
-
-void	move_down(t_var *vars)
-{
-	vars->off_set_y += 40;
-	put_image();
-}
-
-void	move_left(t_var *vars)
-{
-	vars->off_set_x -= 40;
-	put_image();
-}
-
-void	move_right(t_var *vars)
-{
-	vars->off_set_x += 40;
-	put_image();
-}
-
 int	key_hook(int keycode, t_var *vars)
 {
 	if (keycode == ESC_KEY || keycode == CROSS)
-	{
-		if (vars)
-			exit_program(vars);
-	}
+		exit_program(vars);
 	else if (keycode == KEY_UP)
 		move_up(vars);
 	else if (keycode == KEY_DOWN)
@@ -54,14 +27,14 @@ int	key_hook(int keycode, t_var *vars)
 	return (0);
 }
 
-int	mouse_hook(int keycode, t_var *v)
+int	mouse_hook(int keycode)
 {
-	(void) v;
-
 	if (keycode == SCROLL_UP)
 		zoom_in(vars());
 	else if (keycode == SCROLL_DOWN)
 		zoom_out(vars());
+	else if (keycode == LEFT_CLICK)
+		new_fractol();
 	return (0);
 }
 

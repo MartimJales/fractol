@@ -6,7 +6,7 @@
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 16:53:35 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 14:34:06 by mjales           ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:48 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ int	julia_pix(double real, double imag, int maxIterations)
 	iter = 0;
 	while (iter < maxIterations && z_real * z_real + z_imag * z_imag < 4)
 	{
-		new_real = z_real * z_real - z_imag * z_imag - 0.4;
-		new_imag = 2 * z_real * z_imag + 0.6;
-
+		new_real = z_real * z_real - z_imag * z_imag + vars()->real;
+		new_imag = 2 * z_real * z_imag + vars()->imag;
 		z_real = new_real;
 		z_imag = new_imag;
 		iter++;
@@ -70,9 +69,6 @@ int	julia(void)
 	img = new_img(WIDTH, HEIGHT, tutorial);
 	vars()->win = &tutorial;
 	vars()->img_ptr = &img;
-	vars()->off_set_x = 0;
-	vars()->off_set_y = 0;
-	vars()->zoom_i = 50;
 	image_julia(img, vars()->off_set_x, vars()->off_set_y);
 	mlx_put_image_to_window(img.win.mlx_ptr, img.win.win_ptr, \
 	img.img_ptr, 0, 0);

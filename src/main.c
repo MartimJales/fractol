@@ -6,7 +6,7 @@
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:34:54 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 14:34:08 by mjales           ###   ########.fr       */
+/*   Updated: 2023/04/07 15:44:55 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	draw_fractol(char *fractol)
 	if (ft_strncmp(fractol, "MANDELBROT", 10) == 0)
 		mandelbrot();
 	else if (ft_strncmp(fractol, "JULIA", 5) == 0)
-	{
 		julia();
-	}
 }
 
 int	main(int argc, char **argv)

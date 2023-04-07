@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assets.c                                           :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjales <mjales@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 20:29:02 by mjales            #+#    #+#             */
-/*   Updated: 2023/04/07 17:31:29 by mjales           ###   ########.fr       */
+/*   Created: 2023/04/07 15:37:08 by mjales            #+#    #+#             */
+/*   Updated: 2023/04/07 17:02:30 by mjales           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fractol.h"
 
-int	map_color(int intensity, int max)
+void	move_up(t_var *vars)
 {
-	double	t;
-	int		r;
-	int		g;
-	int		b;
+	vars->off_set_y -= 40;
+	put_image();
+}
 
-	t = (double)intensity / max;
-	r = (int)(255 * (1 - t) * t * t * t * 6);
-	g = (int)(255 * (1 - t) * (1 - t) * t * t * 6);
-	b = (int)(255 * (1 - t) * (1 - t) * (1 - t) * t * 6);
-	return (gen_trgb(intensity, r, b, g));
+void	move_down(t_var *vars)
+{
+	vars->off_set_y += 40;
+	put_image();
+}
+
+void	move_left(t_var *vars)
+{
+	vars->off_set_x -= 40;
+	put_image();
+}
+
+void	move_right(t_var *vars)
+{
+	vars->off_set_x += 40;
+	put_image();
 }
